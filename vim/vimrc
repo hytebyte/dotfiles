@@ -54,6 +54,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'glench/vim-jinja2-syntax'
 
 call plug#end()
 
