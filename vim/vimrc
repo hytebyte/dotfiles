@@ -205,6 +205,9 @@ let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active' }
 let g:syntastic_javascript_checkers = ['jshint']
 
+" TaskWarrior settings
+let g:task_rc_override = 'rc.defaultwidth=0'
+
 " Set gitolite custom folding
 autocmd FileType gitolite setlocal foldmethod=expr
       \ foldexpr=GetGitoliteFold(v:lnum)
