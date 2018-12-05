@@ -13,7 +13,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
 Plug 'altercation/vim-colors-solarized'
-Plug 'majutsushi/tagbar'
 Plug 'vim-syntastic/syntastic'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'machakann/vim-highlightedyank'
@@ -196,9 +195,6 @@ nnoremap <leader>si :GoSameIds<cr>
 nnoremap <leader>sc :GoSameIdsClear<cr>
 nnoremap <leader>a :GoAlternate!<cr>
 
-" tagbar settings
-nnoremap <leader>t :TagbarToggle<cr>
-
 " syntastic settings
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_go_checkers = ['golint', 'govet']
@@ -207,6 +203,7 @@ let g:syntastic_javascript_checkers = ['jshint']
 
 " TaskWarrior settings
 let g:task_rc_override = 'rc.defaultwidth=0'
+nnoremap <leader>t :TW +work<cr>
 
 " Set gitolite custom folding
 autocmd FileType gitolite setlocal foldmethod=expr
