@@ -203,7 +203,7 @@ let g:syntastic_javascript_checkers = ['jshint']
 
 " TaskWarrior settings
 let g:task_rc_override = 'rc.defaultwidth=0'
-nnoremap <leader>t :TW +work<cr>
+nnoremap <leader>t :TW<cr>
 
 " Set gitolite custom folding
 autocmd FileType gitolite setlocal foldmethod=expr
