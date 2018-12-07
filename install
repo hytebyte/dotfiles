@@ -8,8 +8,5 @@ ln -sfT .config/dotfiles/tmux.conf ~/.tmux.conf
 ln -sfT .config/dotfiles/vim ~/.vim
 ln -sfT dotfiles/vim ~/.config/nvim
 
-if which >/dev/null vim; then
-  vim +PlugInstall +qall
-elif which >/dev/null nvim; then
-  nvim +PlugInstall +qall
-fi
+VIM=$(which 2>/dev/null vim) || VIM=$(which 2>/dev/null nvim) || exit 0
+$VIM +PlugClean! +PlugUpdate +qall
