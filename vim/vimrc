@@ -4,6 +4,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" Install vim-plug itself (allows :help vim-plug)
+Plug 'junegunn/vim-plug'
+
 " Sensible default settings
 Plug 'tpope/vim-sensible'
 
