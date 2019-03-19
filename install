@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rmdir --ignore-fail-on-non-empty ~/.vim
+[[ -d ~/.vim ]] && rm -rf ~/.vim
 
 ln -sfT .config/dotfiles/inputrc ~/.inputrc
 ln -sfT .config/dotfiles/bashrc ~/.bashrc
