@@ -56,6 +56,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'glench/vim-jinja2-syntax'
+Plug 'nfnty/vim-nftables'
 
 call plug#end()
 
