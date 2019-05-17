@@ -14,7 +14,9 @@ Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'
+"Plug 'edkolev/tmuxline.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'machakann/vim-highlightedyank'
@@ -105,9 +107,9 @@ if &t_Co > 2 || has("gui_running")
   if !has("gui_running") && &term =~ 'linux'
     colorscheme elflord
   else
-    set background=light
+    set background=dark
     try
-      colorscheme solarized
+      colorscheme hybrid
     catch /^Vim\%((\a\+)\)\=:E185/
     endtry
   endif
