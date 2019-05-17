@@ -1,0 +1,6 @@
+Xautolock.time: 3
+Xautolock.locker: /usr/bin/slock
+Xautolock.corners: 00+-
+Xautolock.cornerdelay: 2
+Xautolock.cornerredelay: 10
+Xautolock.cornersize: 3
