@@ -20,6 +20,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'vim-syntastic/syntastic'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-unimpaired'
 
 " General edit tools
 Plug 'tpope/vim-surround'
