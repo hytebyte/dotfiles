@@ -145,7 +145,6 @@ au!
 
 " Set filetype specific options
 autocmd FileType text     setlocal textwidth=78
-autocmd FileType go       setlocal noexpandtab foldmethod=syntax
 autocmd FileType make     setlocal noexpandtab ts=8 sw=8
 autocmd FileType nginx    setlocal expandtab ts=4 sw=4
 autocmd FileType c        setlocal noexpandtab ts=4 sw=4
@@ -208,21 +207,37 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_skip_empty_sections = 1
 
 " vim-go settings
-let g:go_addtags_transform = 'camelcase'
 let g:go_doc_url = 'http://localhost:6060'
 let g:go_fmt_command = "goimports"
 let g:go_fmt_options = {
       \ 'goimports': '-local gitlab.com/ncadmin/,gitlab.com/cvontime/,github.com/ges-sh/,code.idesign.center',
       \ 'gofmt': '-s',
       \ }
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 0
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
 let g:go_list_type = "quickfix"
 let g:go_fold_enable = ['import', 'package_comment']
-nnoremap <leader>d :GoDocBrowser<cr>
-nnoremap <leader>si :GoSameIds<cr>
-nnoremap <leader>sc :GoSameIdsClear<cr>
-nnoremap <leader>a :GoAlternate!<cr>
+let g:go_metalinter_command = "golangci-lint"
+let g:go_metalinter_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'gosimple', 'ineffassign']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'gosimple', 'ineffassign']
+let g:go_auto_type_info = 1
+
+augroup go
+  autocmd!
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=2 shiftwidth=2 foldmethod=syntax
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+  autocmd FileType go nmap <Leader>a <Plug>(go-alternate-edit)
+  autocmd FileType go nmap <leader>d <Plug>(go-doc-browser)
+  autocmd FileType go nmap <leader>si :GoSameIdsToggle<CR>
+augroup END
 
 " syntastic settings
 let g:syntastic_aggregate_errors = 1
