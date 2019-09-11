@@ -234,22 +234,6 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:task_rc_override = 'rc.defaultwidth=0'
 nnoremap <leader>t :TW<cr>
 
-" Set gitolite custom folding
-autocmd FileType gitolite setlocal foldmethod=expr
-      \ foldexpr=GetGitoliteFold(v:lnum)
-function! GetGitoliteFold(lnum)
-  if getline(a:lnum + 1) =~? '\v^repo\s'
-    return '<1'
-  endif
-  if getline(a:lnum) =~? '\v^repo\s' || indent(a:lnum) >= &shiftwidth
-    return '1'
-  endif
-  if getline(a:lnum) =~? '\v^\s*#'
-    return '='
-  endif
-  return '0'
-endfunction
-
 " fugitive settings
 nnoremap <leader>b :Gbrowse<cr>
 vnoremap <leader>b :Gbrowse<cr>
@@ -257,7 +241,6 @@ vnoremap <leader>b :Gbrowse<cr>
 " Toggle quickfix window
 nnoremap <leader>q :call <SID>QuickFix_toggle()<cr>
 function! <SID>QuickFix_toggle()
-  echo 'test'
   for i in range(1, winnr('$'))
     if getbufvar(winbufnr(i), '&buftype') == 'quickfix'
       cclose
