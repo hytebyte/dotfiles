@@ -268,6 +268,8 @@ vnoremap <leader>b :Gbrowse<cr>
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 " Toggle quickfix window
 nnoremap <leader>q :call <SID>QuickFix_toggle()<cr>
