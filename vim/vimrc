@@ -23,6 +23,14 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 " General edit tools
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
@@ -255,6 +263,10 @@ nnoremap <leader>t :TW<cr>
 " fugitive settings
 nnoremap <leader>b :Gbrowse<cr>
 vnoremap <leader>b :Gbrowse<cr>
+
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 " Toggle quickfix window
 nnoremap <leader>q :call <SID>QuickFix_toggle()<cr>
