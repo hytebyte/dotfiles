@@ -267,7 +267,9 @@ vnoremap <leader>b :Gbrowse<cr>
 
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+if exists('*deoplete#custom#option')
+  call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+endif
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
