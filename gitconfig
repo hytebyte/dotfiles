@@ -1,6 +1,6 @@
 [user]
 	name = Paweł Nowak
-	email = pn@ges.sh
+	email = pawel.nowak@ges.sh
 	signingkey = 830E7A482E0D7272
 [core]
 	editor = vim
