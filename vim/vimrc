@@ -23,10 +23,11 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Use deoplete 5.1 until https://github.com/Shougo/deoplete.nvim/issues/1013 is fixed.
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'tag': '5.1', 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'tag': '5.1' }
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -267,9 +268,11 @@ vnoremap <leader>b :Gbrowse<cr>
 
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-if exists('*deoplete#custom#option')
+try
   call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-endif
+catch
+endtry
+
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
