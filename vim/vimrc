@@ -140,7 +140,7 @@ if &t_Co > 2 || has("gui_running")
     colorscheme elflord
   else
     set background=dark
-    let g:hybrid_custom_term_colors = 1
+    set termguicolors
     try
       colorscheme hybrid
     catch /^Vim\%((\a\+)\)\=:E185/
