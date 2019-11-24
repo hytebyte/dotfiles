@@ -229,6 +229,8 @@ let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
+let g:go_highlight_diagnostic_errors = 0
+let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = "quickfix"
 let g:go_fold_enable = ['import', 'package_comment']
 let g:go_metalinter_command = "golangci-lint"
@@ -236,6 +238,7 @@ let g:go_metalinter_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'go
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'gosimple', 'ineffassign']
 let g:go_template_file = $HOME . "/.config/dotfiles/vim/empty.go"
+let g:go_echo_go_info = 0
 
 augroup go
   autocmd!
