@@ -141,6 +141,10 @@ if &t_Co > 2 || has("gui_running")
   else
     set background=dark
     set termguicolors
+    if !has("nvim") " needed for truecolor in vim
+      let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+      let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+    endif
     try
       colorscheme hybrid
     catch /^Vim\%((\a\+)\)\=:E185/
