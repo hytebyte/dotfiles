@@ -26,10 +26,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Use deoplete 5.1 until https://github.com/Shougo/deoplete.nvim/issues/1013 is fixed.
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " General edit tools
