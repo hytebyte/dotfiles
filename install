@@ -9,6 +9,7 @@ ln -sfT .config/dotfiles/gitconfig ~/.gitconfig
 ln -sfT .config/dotfiles/tmux.conf ~/.tmux.conf
 ln -sfT .config/dotfiles/vim ~/.vim
 ln -sfT dotfiles/vim ~/.config/nvim
+ln -sfT dotfiles/alacritty ~/.config/alacritty
 
 VIM=$(which 2>/dev/null vim) || VIM=$(which 2>/dev/null nvim) || exit 0
 $VIM +PlugClean! +PlugUpdate +qall
