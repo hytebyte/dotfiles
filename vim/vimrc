@@ -221,7 +221,6 @@ let g:airline_skip_empty_sections = 1
 let g:go_doc_url = 'http://localhost:6060'
 let g:go_fmt_command = "goimports"
 let g:go_fmt_options = {
-      \ 'goimports': '-local gitlab.com/ncadmin/,gitlab.com/cvontime/,github.com/ges-sh/,code.idesign.center',
       \ 'gofmt': '-s',
       \ }
 let g:go_highlight_types = 1
