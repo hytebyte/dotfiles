@@ -160,6 +160,7 @@ autocmd FileType c        setlocal noexpandtab ts=4 sw=4
 autocmd FileType cpp      setlocal noexpandtab ts=4 sw=4
 autocmd FileType php      setlocal expandtab ts=4 sw=4
 autocmd FileType gitolite setlocal expandtab ts=4 sw=4
+autocmd FileType haskell  setlocal expandtab ts=4 sw=4
 
 augroup END
 
