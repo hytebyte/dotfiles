@@ -34,3 +34,6 @@
 !white
 *color7:       #707880
 *color15:      #c5c8c6
+
+*.selection.background: #5f875f
+*.selection.foreground: #d7ffaf
