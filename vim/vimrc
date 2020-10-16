@@ -23,7 +23,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Use deoplete 5.1 until https://github.com/Shougo/deoplete.nvim/issues/1013 is fixed.
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
@@ -87,7 +86,7 @@ set expandtab
 set foldmethod=marker
 set noshowmode                  " We show the mode with airline or lightline
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set completeopt=menu,menuone    " Show popup menu, even if there is one entry
+set completeopt=menu,menuone,noselect    " Show popup menu, even if there is one entry
 set pumheight=10                " Completion window max size
 set lazyredraw                  " Wait to redraw
 
