@@ -2,7 +2,11 @@ if v:progname =~? "evim"
   finish
 endif
 
-" Install vim-plug if not installed already
+let mapleader = ","
+
+" Plugins {{{1
+
+" Install vim-plug if not installed already.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -11,13 +15,18 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Install vim-plug itself (allows :help vim-plug)
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+" Install vim-plug itself (allows :help vim-plug).
 Plug 'junegunn/vim-plug'
 
-" Sensible default settings
+" Sensible default settings.
 Plug 'tpope/vim-sensible'
 
-" UI
+" UI.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
@@ -29,10 +38,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
+Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
+Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
+Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
 
 " General edit tools
 Plug 'tpope/vim-surround'
@@ -42,10 +50,6 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
-
-if executable('task')
-  Plug 'farseer90718/vim-taskwarrior'
-endif
 
 " Snippets
 Plug 'mattn/emmet-vim'
@@ -59,11 +63,10 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 
 " Go
-if
-  \ v:version > 704 || (v:version == 704 && has('patch1689'))
-  \ || has('nvim')
-  Plug 'fatih/vim-go'
-endif
+function! SupportsVimGo()
+  return v:version > 800 || (v:version == 800 && has('patch1453'))
+endfunction
+Plug 'fatih/vim-go', Cond(SupportsVimGo())
 
 " Other filetypes
 Plug 'cespare/vim-toml'
@@ -77,27 +80,34 @@ Plug 'nfnty/vim-nftables'
 
 call plug#end()
 
-let mapleader = ","
+" Editor settings {{{1
 
-set nobackup                    " Don't create annoying backup files
-set history=50                  " Keep 50 lines of command line history
+colorscheme NeoSolarized
+set background=light " Use light colorscheme variant
+
+set nobackup                    " Don't create annoying backup files.
+set history=50                  " Keep 50 lines of command line history.
 set sw=2
 set ts=2
-set scrolloff=2                 " Always keep at least 2 lines visible around the cursor
+set scrolloff=2                 " Always keep at least 2 lines visible around the cursor.
 set ignorecase                  " Search case insensitive...
-set smartcase                   " ... but not if it begins with upper case
-set number                      " Show line numbers
+set smartcase                   " ... but not if it begins with upper case.
+set number                      " Show line numbers.
 set autowrite                   " Automatically save before :next, :make etc.
-set hidden                      " Buffer should still exist if window is closed
+set hidden                      " Buffer should still exist if window is closed.
 set expandtab
 set foldmethod=marker
-set noshowmode                  " We show the mode with airline or lightline
-set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set completeopt=menu,menuone,noselect    " Show popup menu, even if there is one entry
-set pumheight=10                " Completion window max size
-set lazyredraw                  " Wait to redraw
+set noshowmode                  " We show the mode with airline or lightline.
+set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats.
+set completeopt=menu,menuone,noselect " Show popup menu, even if there is one entry.
+set pumheight=10                " Completion window max size.
+set lazyredraw                  " Wait to redraw.
+set hlsearch                    " Highlight search matches.
+set termguicolors               " Enable 24bit color support.
+set signcolumn=yes              " Always show the sign column.
 
-" Enable to copy to clipboard for operations like yank, delete, change and put
+" Enable to copy to clipboard for operations like yank, delete, change and
+" put.
 if has('unnamedplus')
   set clipboard^=unnamed
   set clipboard^=unnamedplus
@@ -108,123 +118,33 @@ if has('persistent_undo')
   set undofile
 endif
 
-if has('nvim')
-  set inccommand=nosplit
-endif
-
-if exists('+cryptmethod')
-  " When encrypting any file, use the much stronger blowfish algorithm
-  set cryptmethod=blowfish
-  " Don't store data in additional files when using encryption
-  autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo=
-        \ nobackup noshelltemp history=0 secure | endif
-endif
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-  " Use special characters in statusbar
-  let g:airline_powerline_fonts = 1
-  if !has("gui_running") && &term =~ 'linux'
-    colorscheme elflord
-  else
-    set background=dark
-    set termguicolors
-    if !has("nvim") " needed for truecolor in vim
-      let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-      let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-    endif
-    try
-      colorscheme hybrid
-    catch /^Vim\%((\a\+)\)\=:E185/
-    endtry
-  endif
-endif
-
-" Put these in an autocmd group, so that we can delete them easily.
-augroup vimrcEx
-au!
-
-" Set filetype specific options
-autocmd FileType text     setlocal textwidth=78
-autocmd FileType make     setlocal noexpandtab ts=8 sw=8
-autocmd FileType nginx    setlocal expandtab ts=4 sw=4
-autocmd FileType c        setlocal noexpandtab ts=4 sw=4
-autocmd FileType cpp      setlocal noexpandtab ts=4 sw=4
-autocmd FileType php      setlocal expandtab ts=4 sw=4
-autocmd FileType gitolite setlocal expandtab ts=4 sw=4
-autocmd FileType haskell  setlocal expandtab ts=4 sw=4
-
-augroup END
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-                  \ | wincmd p | diffthis
-endif
-
-" Use space to open/close folds in normal mode
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
-" Maintain a visual selection while indenting
-vnoremap < <gv
-vnoremap > >gv
-
-" Disable F1 help because its dumb
-nmap <F1> :echo<CR>
-imap <F1> <C-o>:echo<CR>
-
-" F3 retabs the buffer and removes any trailing whitespace
-nnoremap <silent> <F3> :retab<CR>:call <SID>StripTrailingWhitespaces()<CR>
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s = @/
-  let l = line(".")
-  let c = col(".")
-
-  %s/\s\+$//e
-  " Clean up: restore previous search history and cursor position.
-  let @/ = _s
-  call cursor(l, c)
-endfunction
-
-" Fix ctrl-h in neovim
 if has('nvim')
-  nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+  set inccommand=nosplit
+else
+  " Used for truecolor in vim.
+  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 endif
 
-" F4 toggles paste mode
-nnoremap <F4> :set invpaste paste?<Enter>
-imap <F4> <C-O><F4>
-set pastetoggle=<F4>
+" Switch syntax highlighting on.
+syntax on
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" Settings for airline {{{1
 
-" enable airline buffers display
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 let g:airline_skip_empty_sections = 1
+let g:airline_powerline_fonts = 1 " Use powerline characters
 
-" vim-go settings
+" Settings for vim-go {{{1
+
 let g:go_doc_url = 'http://localhost:6060'
 let g:go_fmt_command = "goimports"
 let g:go_fmt_options = {
@@ -259,7 +179,8 @@ augroup go
   autocmd FileType go nmap <leader>si :GoSameIdsToggle<CR>
 augroup END
 
-" syntastic settings
+" Settings for syntastic {{{1
+
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_mode_map = { 'mode': 'active' }
 let g:syntastic_javascript_checkers = ['jshint']
@@ -268,16 +189,14 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" TaskWarrior settings
-let g:task_rc_override = 'rc.defaultwidth=0'
-nnoremap <leader>t :TW<cr>
+" Settings for fugitive {{{1
 
-" fugitive settings
 nnoremap <leader>b :Gbrowse<cr>
 vnoremap <leader>b :Gbrowse<cr>
 let g:fugitive_gitlab_domains = ['https://gitlab.demon.fm']
 
-" deoplete settings
+" Settings for deoplete {{{1
+
 let g:deoplete#enable_at_startup = 1
 try
   call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
@@ -286,10 +205,53 @@ endtry
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Key mappings {{{1
+
+" Don't use Ex mode, use Q for formatting
+noremap Q gq
+
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" Use space to open/close folds in normal mode
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+" Maintain a visual selection while indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Disable F1 help
+nnoremap <F1> :echo<CR>
+inoremap <F1> <C-o>:echo<CR>
+
+" F3 retabs the buffer and removes any trailing whitespace
+nnoremap <silent> <F3> :retab<CR>:call <SID>StripTrailingWhitespaces()<CR>
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s = @/
+  let l = line(".")
+  let c = col(".")
+
+  %s/\s\+$//e
+  " Clean up: restore previous search history and cursor position.
+  let @/ = _s
+  call cursor(l, c)
+endfunction
+
+" F4 toggles paste mode
+nnoremap <silent> <F4> :set paste!<cr>
+inoremap <silent> <F4> <C-O>:set paste!<cr>
+set pastetoggle=<F4>
+
+nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Toggle quickfix window
-nnoremap <leader>q :call <SID>QuickFix_toggle()<cr>
-function! <SID>QuickFix_toggle()
+nnoremap <silent> <leader>q :call <SID>QuickFixToggle()<cr>
+function! <SID>QuickFixToggle()
   for i in range(1, winnr('$'))
     if getbufvar(winbufnr(i), '&buftype') == 'quickfix'
       cclose
@@ -298,3 +260,30 @@ function! <SID>QuickFix_toggle()
   endfor
   copen
 endfunction
+
+" Commands {{{1
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+                  \ | wincmd p | diffthis
+endif
+
+" Filetypes {{{1
+
+augroup filetypes
+  autocmd!
+  autocmd FileType text     setlocal textwidth=78
+  autocmd FileType make     setlocal noexpandtab ts=8 sw=8
+  autocmd FileType nginx    setlocal expandtab ts=4 sw=4
+  autocmd FileType c        setlocal noexpandtab ts=4 sw=4
+  autocmd FileType cpp      setlocal noexpandtab ts=4 sw=4
+  autocmd FileType php      setlocal expandtab ts=4 sw=4
+  autocmd FileType gitolite setlocal expandtab ts=4 sw=4
+  autocmd FileType haskell  setlocal expandtab ts=4 sw=4
+  autocmd FileType java     setlocal expandtab ts=4 sw=4
+augroup END
+
+" }}}1
