@@ -227,6 +227,9 @@ vnoremap > >gv
 nnoremap <F1> :echo<CR>
 inoremap <F1> <C-o>:echo<CR>
 
+" F2 toggles background (dark/light)
+nnoremap <silent> <F2> :let &background = (&background == 'light' ? 'dark' : 'light')<CR>
+
 " F3 retabs the buffer and removes any trailing whitespace
 nnoremap <silent> <F3> :retab<CR>:call <SID>StripTrailingWhitespaces()<CR>
 function! <SID>StripTrailingWhitespaces()
