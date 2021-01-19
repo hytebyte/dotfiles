@@ -41,6 +41,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
 Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
 Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+Plug 'konfekt/foldtext'
 
 " General edit tools
 Plug 'tpope/vim-surround'
@@ -96,7 +97,6 @@ set number                      " Show line numbers.
 set autowrite                   " Automatically save before :next, :make etc.
 set hidden                      " Buffer should still exist if window is closed.
 set expandtab
-set foldmethod=marker
 set noshowmode                  " We show the mode with airline or lightline.
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats.
 set completeopt=menu,menuone,noselect " Show popup menu, even if there is one entry.
@@ -129,6 +129,10 @@ else
   " Used for truecolor in vim.
   let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
   let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+endif
+
+if has("folding")
+  set foldmethod=marker
 endif
 
 " Switch syntax highlighting on.
