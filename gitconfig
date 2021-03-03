@@ -1,3 +1,4 @@
+# vim: ft=conf ts=2 sw=2 noexpandtab
 [user]
 	name = Paweł Nowak
 	email = czesio@gmx.com
@@ -16,10 +17,10 @@
 [http "https://gopkg.in"]
 	followRedirects = true
 [url "ssh://git@github.com/ges-sh/"]
-  insteadOf = https://github.com/ges-sh/
+	insteadOf = https://github.com/ges-sh/
 [url "ssh://git@gitlab.com/ncadmin/"]
-  insteadOf = https://gitlab.com/ncadmin/
+	insteadOf = https://gitlab.com/ncadmin/
 [url "ssh://git@gitlab.com/cvontime/"]
-  insteadOf = https://gitlab.com/cvontime/
+	insteadOf = https://gitlab.com/cvontime/
 [init]
 	defaultBranch = master
