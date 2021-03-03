@@ -38,9 +38,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
-Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
-Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+"Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
+"Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
+"Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'konfekt/foldtext'
 
 " General edit tools
@@ -87,7 +88,7 @@ call plug#end()
 " Editor settings {{{1
 
 colorscheme NeoSolarized
-set background=light " Use light colorscheme variant
+set background=light
 
 set nobackup                    " Don't create annoying backup files.
 set history=50                  " Keep 50 lines of command line history.
@@ -152,6 +153,7 @@ let g:airline_powerline_fonts = 1 " Use powerline characters
 
 " Settings for vim-go {{{1
 
+let g:go_doc_keywordprg_enabled = 0
 let g:go_doc_url = 'http://localhost:6060'
 let g:go_fmt_command = "goimports"
 let g:go_fmt_options = {
@@ -236,6 +238,7 @@ inoremap <F1> <C-o>:echo<CR>
 
 " F2 toggles background (dark/light)
 nnoremap <silent> <F2> :let &background = (&background == 'light' ? 'dark' : 'light')<CR>
+inoremap <silent> <F2> <C-o>:let &background = (&background == 'light' ? 'dark' : 'light')<CR>
 
 " F3 retabs the buffer and removes any trailing whitespace
 nnoremap <silent> <F3> :retab<CR>:call <SID>StripTrailingWhitespaces()<CR>
@@ -261,7 +264,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Toggle quickfix window
 nnoremap <silent> <leader>q :call <SID>QuickFixToggle()<cr>
-function! <SID>QuickFixToggle()
+function! s:QuickFixToggle()
   for i in range(1, winnr('$'))
     if getbufvar(winbufnr(i), '&buftype') == 'quickfix'
       cclose
@@ -270,6 +273,21 @@ function! <SID>QuickFixToggle()
   endfor
   copen
 endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
+
+function! s:ShowDocumentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Commands {{{1
 
