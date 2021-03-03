@@ -98,6 +98,7 @@ set scrolloff=2                 " Always keep at least 2 lines visible around th
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not if it begins with upper case.
 set number                      " Show line numbers.
+set relativenumber              " Use line numbers relative to the current line.
 set autowrite                   " Automatically save before :next, :make etc.
 set hidden                      " Buffer should still exist if window is closed.
 set expandtab
