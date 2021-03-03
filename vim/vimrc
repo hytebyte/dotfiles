@@ -305,14 +305,14 @@ endif
 augroup filetypes
   autocmd!
   autocmd FileType text     setlocal textwidth=78
-  autocmd FileType make     setlocal noexpandtab ts=8 sw=8
-  autocmd FileType nginx    setlocal expandtab ts=4 sw=4
-  autocmd FileType c        setlocal noexpandtab ts=4 sw=4
-  autocmd FileType cpp      setlocal noexpandtab ts=4 sw=4
-  autocmd FileType php      setlocal expandtab ts=4 sw=4
-  autocmd FileType gitolite setlocal expandtab ts=4 sw=4
-  autocmd FileType haskell  setlocal expandtab ts=4 sw=4
-  autocmd FileType java     setlocal expandtab ts=4 sw=4
+  autocmd FileType make     setlocal ts=8 sw=8 noexpandtab
+  autocmd FileType nginx    setlocal ts=4 sw=4 expandtab
+  autocmd FileType c        setlocal ts=4 sw=4 noexpandtab
+  autocmd FileType cpp      setlocal ts=4 sw=4 noexpandtab
+  autocmd FileType php      setlocal ts=4 sw=4 expandtab
+  autocmd FileType gitolite setlocal ts=4 sw=4 expandtab
+  autocmd FileType haskell  setlocal ts=4 sw=4 expandtab
+  autocmd FileType java     setlocal ts=4 sw=4 expandtab
 augroup END
 
 " }}}1
