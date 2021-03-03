@@ -221,6 +221,10 @@ inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 let g:asmsyntax = 'nasm'
 
+" Settings for rust {{{1
+
+let g:rustfmt_autosave = 1
+
 " Key mappings {{{1
 
 " Don't use Ex mode, use Q for formatting
@@ -318,6 +322,7 @@ augroup filetypes
   autocmd FileType haskell  setlocal ts=4 sw=4 expandtab
   autocmd FileType java     setlocal ts=4 sw=4 expandtab
   autocmd FileType nasm     setlocal ts=8 sw=8 noexpandtab
+  autocmd FileType rust     setlocal ts=4 sw=4 expandtab foldmethod=syntax
 augroup END
 
 " }}}1
