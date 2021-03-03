@@ -21,3 +21,5 @@
   insteadOf = https://gitlab.com/ncadmin/
 [url "ssh://git@gitlab.com/cvontime/"]
   insteadOf = https://gitlab.com/cvontime/
+[init]
+	defaultBranch = master
