@@ -217,6 +217,10 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Settings for asm {{{1
+
+let g:asmsyntax = 'nasm'
+
 " Key mappings {{{1
 
 " Don't use Ex mode, use Q for formatting
@@ -313,6 +317,7 @@ augroup filetypes
   autocmd FileType gitolite setlocal ts=4 sw=4 expandtab
   autocmd FileType haskell  setlocal ts=4 sw=4 expandtab
   autocmd FileType java     setlocal ts=4 sw=4 expandtab
+  autocmd FileType nasm     setlocal ts=8 sw=8 noexpandtab
 augroup END
 
 " }}}1
