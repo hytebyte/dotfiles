@@ -32,5 +32,3 @@ alias info='info --vi-keys'
 alias godeps="comm -2 -3 <(go list -f '{{join .Deps \"\n\"}}' | sort) <(go list std | sort)"
 alias ls='ls --color=auto'
 alias ip='ip --color=auto'
-
-which >/dev/null 2>&1 nvim && alias vim=nvim
