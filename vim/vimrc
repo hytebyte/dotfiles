@@ -154,10 +154,7 @@ let g:airline_powerline_fonts = 1 " Use powerline characters
 
 let g:go_doc_keywordprg_enabled = 0
 let g:go_doc_url = 'http://localhost:6060'
-let g:go_fmt_command = "goimports"
-let g:go_fmt_options = {
-      \ 'gofmt': '-s',
-      \ }
+let g:go_doc_balloon = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -173,16 +170,19 @@ let g:go_metalinter_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'go
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'gosimple', 'ineffassign']
 let g:go_template_file = $HOME . "/.config/dotfiles/vim/empty.go"
+let g:go_test_show_name = 1
 let g:go_echo_go_info = 0
+let g:go_gopls_gofumpt = 1
 
 augroup go
   autocmd!
   autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=2 shiftwidth=2 foldmethod=syntax
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
   autocmd FileType go nmap <leader>t <Plug>(go-test)
-  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-  autocmd FileType go nmap <Leader>i <Plug>(go-info)
-  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
-  autocmd FileType go nmap <Leader>a <Plug>(go-alternate-edit)
+  autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <leader>i <Plug>(go-info)
+  autocmd FileType go nmap <leader>l <Plug>(go-metalinter)
+  autocmd FileType go nmap <leader>a <Plug>(go-alternate-edit)
   autocmd FileType go nmap <leader>d <Plug>(go-doc-browser)
   autocmd FileType go nmap <leader>si :GoSameIdsToggle<CR>
 augroup END
