@@ -304,10 +304,15 @@ colors:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
+#shell:
+#  program: /usr/bin/tmux
+#  args:
+#    - new-session
 shell:
-  program: /usr/bin/tmux
+  program: /usr/bin/bash
   args:
-    - new-session
+    - -c
+    - exec /usr/bin/tmux new-session -e "SWAYSOCK=$SWAYSOCK"
 
 # Startup directory
 #
