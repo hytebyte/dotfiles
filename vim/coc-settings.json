@@ -1,3 +1,6 @@
 {
+  "clangd.checkUpdates": true,
+  "rust-analyzer.inlayHints.chainingHintsSeparator": "‣ ",
+  "rust-analyzer.inlayHints.typeHintsSeparator": "‣ ",
   "suggest.enablePreview": true
 }
