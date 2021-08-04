@@ -222,6 +222,15 @@ let g:asmsyntax = 'nasm'
 " Settings for rust {{{1
 
 let g:rustfmt_autosave = 1
+let g:rust_fold = 1 " All folds open by default.
+
+augroup rust
+  autocmd FileType rust nmap <leader>r :Crun<CR>
+  autocmd FileType rust nmap <leader>t :Ctest<CR>
+  autocmd FileType rust nmap <M-j> :CocCommand rust-analyzer.moveItemDown<CR>
+  autocmd FileType rust nmap <M-k> :CocCommand rust-analyzer.moveItemUp<CR>
+  autocmd FileType rust nmap <leader>d :CocCommand rust-analyzer.openDocs<CR>
+augroup END
 
 " Key mappings {{{1
 
