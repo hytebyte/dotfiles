@@ -29,6 +29,7 @@ Plug 'tpope/vim-sensible'
 " UI.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'https://gitlab.com/hytebyte/vim-airline-theme-snow.git'
 Plug 'tpope/vim-vinegar'
 Plug 'icymind/NeoSolarized'
 Plug 'w0ng/vim-hybrid'
@@ -317,7 +318,7 @@ endif
 
 " Colorscheme {{{1
 
-function! SetHighlights_NeoSolarized() abort " {{{2
+function! ColorScheme_NeoSolarized() abort " {{{2
   let s:gui_hint_sign = "#30525c"
   let s:gui_code_lens = s:gui_hint_sign
   let s:term_hint_sign = "10"
@@ -334,7 +335,7 @@ function! SetHighlights_NeoSolarized() abort " {{{2
   exe "highlight CocCodeLens ctermfg=".s:term_code_lens." guifg=".s:gui_code_lens
 endfunction
 
-function! SetHighlights_hybrid() abort " {{{2
+function! ColorScheme_hybrid() abort " {{{2
   let s:gui_hint_sign = "#373b41"
   let s:gui_code_lens = s:gui_hint_sign
 
@@ -347,17 +348,30 @@ function! SetHighlights_hybrid() abort " {{{2
   exe "highlight CocCodeLens guifg=".s:gui_code_lens
 endfunction
 
-function! SetHighlights_snow() abort " {{{2
-  let g:airline_theme='snow_'.&background
+function! ColorScheme_snow() abort " {{{2
+  let s:gui_hint_sign = "#535c65"
+  let s:gui_code_lens = s:gui_hint_sign
+  let s:term_hint_sign = "240"
+  let s:term_code_lens = s:term_hint_sign
+
+  if &background == "light"
+    let s:gui_hint_sign = "#cbd2d9"
+    let s:gui_code_lens = s:gui_hint_sign
+    let s:term_hint_sign = "252"
+    let s:term_code_lens = s:term_hint_sign
+  endif
+
+  exe "highlight CocHintSign ctermfg=".s:term_hint_sign." guifg=".s:gui_hint_sign
+  exe "highlight CocCodeLens ctermfg=".s:term_code_lens." guifg=".s:gui_code_lens
 endfunction
 
 " }}}2
 
 augroup highlights
   autocmd!
-  autocmd ColorScheme NeoSolarized  call SetHighlights_NeoSolarized()
-  autocmd ColorScheme hybrid        call SetHighlights_hybrid()
-  autocmd ColorScheme snow          call SetHighlights_snow()
+  autocmd ColorScheme NeoSolarized  call ColorScheme_NeoSolarized()
+  autocmd ColorScheme hybrid        call ColorScheme_hybrid()
+  autocmd ColorScheme snow          call ColorScheme_snow()
 augroup END
 
 if strftime('%H') >= 7 && strftime('%H') < 19
@@ -365,6 +379,13 @@ if strftime('%H') >= 7 && strftime('%H') < 19
 else
   set background=dark
 endif
+
+if !exists('g:airline_theme_map')
+  let g:airline_theme_map = {}
+endif
+call extend(g:airline_theme_map, {
+      \ 'snow': 'snow',
+      \ }, 'keep')
 
 colorscheme snow
 
