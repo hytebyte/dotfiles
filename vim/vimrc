@@ -21,69 +21,69 @@ function! Cond(cond, ...)
 endfunction
 
 " Install vim-plug itself (allows :help vim-plug).
-Plug 'junegunn/vim-plug'
+Plug 'https://github.com/junegunn/vim-plug'
 
 " Sensible default settings.
-Plug 'tpope/vim-sensible'
+Plug 'https://github.com/tpope/vim-sensible'
 
 " UI.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'https://gitlab.com/hytebyte/vim-airline-theme-snow.git'
-Plug 'tpope/vim-vinegar'
-Plug 'icymind/NeoSolarized'
-Plug 'w0ng/vim-hybrid'
-Plug 'nightsense/snow'
-"Plug 'edkolev/tmuxline.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'machakann/vim-highlightedyank'
-Plug 'tpope/vim-unimpaired'
-Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
-"Plug 'roxma/nvim-yarp', Cond(!has('nvim'))
-"Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'konfekt/foldtext'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
+Plug 'https://gitlab.com/hytebyte/vim-airline-theme-snow'
+Plug 'https://github.com/tpope/vim-vinegar'
+Plug 'https://github.com/icymind/NeoSolarized'
+Plug 'https://github.com/w0ng/vim-hybrid'
+Plug 'https://github.com/nightsense/snow'
+"Plug 'https://github.com/edkolev/tmuxline.vim'
+Plug 'https://github.com/vim-syntastic/syntastic'
+Plug 'https://github.com/christoomey/vim-tmux-navigator'
+Plug 'https://github.com/machakann/vim-highlightedyank'
+Plug 'https://github.com/tpope/vim-unimpaired'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+"Plug 'https://github.com/Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : {},
+"Plug 'https://github.com/roxma/nvim-yarp', Cond(!has('nvim'))
+"Plug 'https://github.com/roxma/vim-hug-neovim-rpc', Cond(!has('nvim'))
+Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
+Plug 'https://github.com/konfekt/foldtext'
 
 " General edit tools
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/matchit.zip'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/vim-scripts/matchit.zip'
 
 " Tools integration
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/tpope/vim-rhubarb'
+Plug 'https://github.com/shumphrey/fugitive-gitlab.vim'
 
 " Snippets
-Plug 'mattn/emmet-vim'
-"Plug 'SirVer/ultisnips'
+Plug 'https://github.com/mattn/emmet-vim'
+"Plug 'https://github.com/SirVer/ultisnips'
 
 " JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'digitaltoad/vim-jade'
-Plug 'nikvdp/ejs-syntax'
-Plug 'kchmck/vim-coffee-script'
-Plug 'leafgarland/typescript-vim'
+Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'https://github.com/digitaltoad/vim-jade'
+Plug 'https://github.com/nikvdp/ejs-syntax'
+Plug 'https://github.com/kchmck/vim-coffee-script'
+Plug 'https://github.com/leafgarland/typescript-vim'
 
 " Go
 function! SupportsVimGo()
   return v:version > 800 || (v:version == 800 && has('patch1453'))
 endfunction
-Plug 'fatih/vim-go', Cond(SupportsVimGo())
+Plug 'https://github.com/fatih/vim-go', Cond(SupportsVimGo())
 
 " Python
-Plug 'tmhedberg/SimpylFold'
+Plug 'https://github.com/tmhedberg/SimpylFold'
 
 " Other filetypes
-Plug 'cespare/vim-toml'
-Plug 'chr4/nginx.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'glench/vim-jinja2-syntax'
-Plug 'nfnty/vim-nftables'
+Plug 'https://github.com/cespare/vim-toml'
+Plug 'https://github.com/chr4/nginx.vim'
+Plug 'https://github.com/ekalinin/Dockerfile.vim'
+Plug 'https://github.com/rust-lang/rust.vim'
+Plug 'https://github.com/Matt-Deacalion/vim-systemd-syntax'
+Plug 'https://github.com/martinda/Jenkinsfile-vim-syntax'
+Plug 'https://github.com/glench/vim-jinja2-syntax'
+Plug 'https://github.com/nfnty/vim-nftables'
 
 call plug#end()
 
