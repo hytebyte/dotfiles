@@ -27,6 +27,7 @@ Plug 'https://github.com/junegunn/vim-plug'
 Plug 'https://github.com/tpope/vim-sensible'
 
 " UI.
+Plug 'https://github.com/chrisbra/csv.vim'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
 Plug 'https://gitlab.com/hytebyte/vim-airline-theme-snow'
