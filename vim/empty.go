@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-func run() error {
-	return nil
-}
-
 func main() {
 	if err := run(); err != nil {
 		fmt.Fprintln(os.Stderr, "Error:", err)
 		os.Exit(1)
 	}
+}
+
+func run() error {
+	return nil
 }
