@@ -166,7 +166,7 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = "quickfix"
-let g:go_fold_enable = ['import', 'package_comment']
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 let g:go_metalinter_command = "golangci-lint"
 let g:go_metalinter_enabled = ['typecheck', 'govet', 'deadcode', 'errcheck', 'gosimple', 'ineffassign']
 let g:go_metalinter_autosave = 0
@@ -178,7 +178,7 @@ let g:go_gopls_gofumpt = 1
 
 augroup go
   autocmd!
-  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=2 shiftwidth=2 foldmethod=syntax
+  autocmd FileType go setlocal noexpandtab tabstop=2 shiftwidth=2 foldmethod=syntax foldnestmax=1
   autocmd FileType go nmap <leader>r <Plug>(go-run)
   autocmd FileType go nmap <leader>t <Plug>(go-test)
   autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
