@@ -327,9 +327,13 @@ function! ColorScheme_NeoSolarized() abort " {{{2
   let s:gui_hint_sign = "#30525c"
   let s:gui_folded_fg = "#839496"
   let s:gui_folded_bg = "#002b36"
+  let s:gui_go_coverage_covered = "#719e07"
+  let s:gui_go_coverage_uncover = "#dc322f"
   let s:term_hint_sign = "10"
   let s:term_folded_fg = "12"
   let s:term_folded_bg = "8"
+  let s:term_go_coverage_covered = "2"
+  let s:term_go_coverage_uncover = "1"
 
   if &background == "light"
     let s:gui_hint_sign = "#c1c5bb"
@@ -342,6 +346,8 @@ function! ColorScheme_NeoSolarized() abort " {{{2
 
   exe "highlight CocHintSign ctermfg=".s:term_hint_sign." guifg=".s:gui_hint_sign
   exe "highlight! Folded cterm=underline ctermfg=".s:term_folded_fg." ctermbg=".s:term_folded_bg." gui=underline guifg=".s:gui_folded_fg." guibg=".s:gui_folded_bg
+  exe "highlight! goCoverageCovered ctermfg=".s:term_go_coverage_covered." guifg=".s:gui_go_coverage_covered
+  exe "highlight! goCoverageUncover ctermfg=".s:term_go_coverage_uncover." guifg=".s:gui_go_coverage_uncover
   highlight! link CocCodeLens CocHintSign
 endfunction
 
@@ -385,7 +391,7 @@ call extend(g:airline_theme_map, {
       \ 'snow': 'snow',
       \ }, 'keep')
 
-colorscheme snow
+colorscheme NeoSolarized
 
 " Filetypes {{{1
 
