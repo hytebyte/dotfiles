@@ -217,6 +217,10 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Settings for c {{{1
+
+let g:c_no_comment_fold = 1
+
 " Settings for asm {{{1
 
 let g:asmsyntax = 'nasm'
