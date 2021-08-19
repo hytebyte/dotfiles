@@ -325,14 +325,23 @@ endif
 
 function! ColorScheme_NeoSolarized() abort " {{{2
   let s:gui_hint_sign = "#30525c"
+  let s:gui_folded_fg = "#839496"
+  let s:gui_folded_bg = "#002b36"
   let s:term_hint_sign = "10"
+  let s:term_folded_fg = "12"
+  let s:term_folded_bg = "8"
 
   if &background == "light"
     let s:gui_hint_sign = "#c1c5bb"
+    let s:gui_folded_fg = "#657b83"
+    let s:gui_folded_bg = "#fdf6e3"
     let s:term_hint_sign = "14"
+    let s:term_folded_fg = "11"
+    let s:term_folded_bg = "15"
   endif
 
   exe "highlight CocHintSign ctermfg=".s:term_hint_sign." guifg=".s:gui_hint_sign
+  exe "highlight! Folded cterm=underline ctermfg=".s:term_folded_fg." ctermbg=".s:term_folded_bg." gui=underline guifg=".s:gui_folded_fg." guibg=".s:gui_folded_bg
   highlight! link CocCodeLens CocHintSign
 endfunction
 
