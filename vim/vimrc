@@ -325,49 +325,33 @@ endif
 
 function! ColorScheme_NeoSolarized() abort " {{{2
   let s:gui_hint_sign = "#30525c"
-  let s:gui_code_lens = s:gui_hint_sign
   let s:term_hint_sign = "10"
-  let s:term_code_lens = s:term_hint_sign
 
   if &background == "light"
     let s:gui_hint_sign = "#c1c5bb"
-    let s:gui_code_lens = s:gui_hint_sign
     let s:term_hint_sign = "14"
-    let s:term_code_lens = s:term_hint_sign
   endif
 
   exe "highlight CocHintSign ctermfg=".s:term_hint_sign." guifg=".s:gui_hint_sign
-  exe "highlight CocCodeLens ctermfg=".s:term_code_lens." guifg=".s:gui_code_lens
+  highlight! link CocCodeLens CocHintSign
 endfunction
 
 function! ColorScheme_hybrid() abort " {{{2
-  let s:gui_hint_sign = "#373b41"
-  let s:gui_code_lens = s:gui_hint_sign
-
-  if &background == "light"
-    let s:gui_hint_sign = "#bcbcbc"
-    let s:gui_code_lens = s:gui_hint_sign
-  endif
-
-  exe "highlight CocHintSign guifg=".s:gui_hint_sign
-  exe "highlight CocCodeLens guifg=".s:gui_code_lens
+  highlight! link CocHintSign LineNr
+  highlight! link CocCodeLens CocHintSign
 endfunction
 
 function! ColorScheme_snow() abort " {{{2
   let s:gui_hint_sign = "#535c65"
-  let s:gui_code_lens = s:gui_hint_sign
   let s:term_hint_sign = "240"
-  let s:term_code_lens = s:term_hint_sign
 
   if &background == "light"
     let s:gui_hint_sign = "#cbd2d9"
-    let s:gui_code_lens = s:gui_hint_sign
     let s:term_hint_sign = "252"
-    let s:term_code_lens = s:term_hint_sign
   endif
 
   exe "highlight CocHintSign ctermfg=".s:term_hint_sign." guifg=".s:gui_hint_sign
-  exe "highlight CocCodeLens ctermfg=".s:term_code_lens." guifg=".s:gui_code_lens
+  highlight! link CocCodeLens CocHintSign
 endfunction
 
 " }}}2
