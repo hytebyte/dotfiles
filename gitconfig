@@ -12,6 +12,7 @@
 	rebase = false
 [push]
 	default = simple
+	recurseSubmodules = on-demand
 [commit]
 	gpgsign = true
 [http "https://gopkg.in"]
@@ -26,3 +27,9 @@
 	insteadOf = https://gitlab.com/hytebyte/
 [init]
 	defaultBranch = master
+[diff]
+	submodule = log
+[status]
+	submodulesummary = 1
+[submodule]
+	recurse = true
