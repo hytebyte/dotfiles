@@ -8,7 +8,7 @@ ln -sfT .config/dotfiles/jshintrc ~/.jshintrc
 ln -sfT .config/dotfiles/gitconfig ~/.gitconfig
 ln -sfT .config/dotfiles/tmux.conf ~/.tmux.conf
 ln -sfT .config/dotfiles/vim ~/.vim
-ln -sfT dotfiles/vim ~/.config/nvim
+ln -sfT dotfiles/nvim ~/.config/nvim
 ln -sfT dotfiles/alacritty ~/.config/alacritty
 
 VIM=$(which 2>/dev/null nvim) || VIM=$(which 2>/dev/null vim) || exit 0
