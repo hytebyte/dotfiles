@@ -1,0 +1,5 @@
+import:
+  - ~/.config/alacritty/colors_gruvbox_dark.yml
+  #- ~/.config/alacritty/colors_gruvbox_light.yml
+  #- ~/.config/alacritty/colors_hybrid.yml
+  #- ~/.config/alacritty/colors_solarized_light.yml
