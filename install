@@ -18,7 +18,8 @@ fi
 if command -v >/dev/null nvim; then
   repo=https://github.com/wbthomason/packer.nvim
   install_path=~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  plugins_path=~/.config/nvim/lua/plugins.lua
   if [[ -e $install_path ]] || git clone --depth 1 $repo $install_path; then
-    nvim --headless -u .config/nvim/lua/plugins.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless -u $plugins_path -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   fi
 fi
