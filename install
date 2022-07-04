@@ -11,5 +11,14 @@ ln -sfT .config/dotfiles/vim ~/.vim
 ln -sfT dotfiles/nvim ~/.config/nvim
 ln -sfT dotfiles/alacritty ~/.config/alacritty
 
-VIM=$(which 2>/dev/null nvim) || VIM=$(which 2>/dev/null vim) || exit 0
-$VIM -es -u ~/.config/dotfiles/vim/vimrc -i NONE -c PlugInstall -c qa
+if command -v >/dev/null vim; then
+  vim -es -u ~/.config/dotfiles/vim/vimrc -i NONE -c PlugInstall -c qa
+fi
+
+if command -v >/dev/null nvim; then
+  repo=https://github.com/wbthomason/packer.nvim
+  install_path=~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  if [[ -e $install_path ]] || git clone --depth 1 $repo $install_path; then
+    nvim --headless -u .config/nvim/lua/plugins.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  fi
+fi
