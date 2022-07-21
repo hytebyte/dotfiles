@@ -99,7 +99,8 @@ end
 local function organize_imports(wait_ms)
   local params = vim.lsp.util.make_range_params()
   params.context = {
-    only = { vim.lsp.protocol.CodeActionKind.SourceOrganizeImports } }
+    only = { vim.lsp.protocol.CodeActionKind.SourceOrganizeImports },
+  }
   local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
   for _, res in pairs(result or {}) do
     for _, r in pairs(res.result or {}) do
@@ -191,6 +192,7 @@ lsp_setup("sumneko_lua", extend_with {
           table.insert(path, "lua/?/init.lua")
           return path
         end)(),
+        pathStrict = true,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
