@@ -50,7 +50,4 @@ return require('packer').startup(function(use, use_rocks)
   use { 'tpope/vim-fugitive' }
   use { 'shumphrey/fugitive-gitlab.vim' }
   use { 'tpope/vim-rhubarb' }
-
-  -- Used for OSC 52.
-  use_rocks { 'base64' }
 end)

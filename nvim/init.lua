@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 ---@param lines string[] A list of lines to copy.
 ---@param ...   string Parameters passed as Ps.
 local function copy(lines, ...)
-  local data = require("base64").encode(table.concat(lines, "\n"))
+  local data = vim.fn.system("base64 | tr -d '\n'", lines)
   for _, sel in ipairs({ ... }) do
     io.stdout:write('\027]52;' .. sel .. ';' .. data .. '\a')
   end
