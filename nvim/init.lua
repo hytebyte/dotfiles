@@ -62,6 +62,35 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Use OSC 52 on yank.
+
+---Copy lines using OSC 52.
+---@param lines string[] A list of lines to copy.
+---@param ...   string Parameters passed as Ps.
+local function copy(lines, ...)
+  local data = require("base64").encode(table.concat(lines, "\n"))
+  for _, sel in ipairs({ ... }) do
+    io.stdout:write('\027]52;' .. sel .. ';' .. data .. '\a')
+  end
+end
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = groupInit,
+  pattern = "*",
+  callback = function()
+    if vim.v.event.operator ~= "y" then return end
+    local reg = vim.v.event.regname
+    local lines = vim.v.event.regcontents
+    if reg == "" then
+      copy(lines, "s", "c")
+    elseif reg == "*" then
+      copy(lines, "s")
+    elseif reg == "+" then
+      copy(lines, "c")
+    end
+  end,
+})
+
 -- Settings for LSP {{{1
 
 vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
