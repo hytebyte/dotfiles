@@ -1,4 +1,4 @@
-return require('packer').startup(function(use, use_rocks)
+return require('packer').startup(function(use)
   -- Make packer manage itself.
   use { 'wbthomason/packer.nvim' }
 
