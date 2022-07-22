@@ -9,8 +9,11 @@ require("plugins")
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = groupInit,
-  pattern = "plugins.lua",
-  command = "source <afile> | PackerCompile",
+  pattern = "/*/.config/dotfiles/nvim/lua/plugins.lua",
+  callback = function(e)
+    vim.cmd("source " .. e.file)
+    require("packer").compile()
+  end,
 })
 
 -- Editor settings {{{1
@@ -98,6 +101,8 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
 
+---Set default LSP keybindings for a buffer.
+---@param bufnr number The buffer to set the keybindings for.
 local function set_buf_keymap_for_lsp(bufnr)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
@@ -116,6 +121,8 @@ local function set_buf_keymap_for_lsp(bufnr)
   end, { buffer = bufnr })
 end
 
+---Enable autoformat using the LSP server for a buffer.
+---@param bufnr number The buffer number.
 local function enable_buf_autoformat_on_save(bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
@@ -125,12 +132,15 @@ local function enable_buf_autoformat_on_save(bufnr)
   })
 end
 
-local function organize_imports(wait_ms)
+---Organize the imports in the given buffer using LSP.
+---@param bufnr number The buffer number.
+---@param wait_ms number How long to wait for server response (in milliseconds).
+local function organize_imports(bufnr, wait_ms)
   local params = vim.lsp.util.make_range_params()
   params.context = {
     only = { vim.lsp.protocol.CodeActionKind.SourceOrganizeImports },
   }
-  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, wait_ms)
   for _, res in pairs(result or {}) do
     for _, r in pairs(res.result or {}) do
       if r.edit then
@@ -142,11 +152,13 @@ local function organize_imports(wait_ms)
   end
 end
 
+---Enable automatic imports organization on save using the LSP server.
+---@param bufnr number The buffer number.
 local function enable_buf_organize_imports_on_save(bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = bufnr,
     callback = function()
-      organize_imports(1000)
+      organize_imports(bufnr, 1000)
     end,
   })
 end
