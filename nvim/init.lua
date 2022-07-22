@@ -174,6 +174,9 @@ local default_config = {
   end,
 }
 
+---Setup an LSP server.
+---@param name string LSP server name as configured in lspconfig.
+---@param ... fun(config: table):table A list of decorators executed on the default config.
 local function lsp_setup(name, ...)
   local config = vim.tbl_deep_extend("force", {}, default_config)
   for _, fn in ipairs({ ... }) do
@@ -182,6 +185,9 @@ local function lsp_setup(name, ...)
   require("lspconfig")[name].setup(config)
 end
 
+---Create a decorator that extends a table with the given extension.
+---@param extension table Data used by the decorator when extending a table.
+---@return fun(config: table):table
 local function extend_with(extension)
   return function(config)
     return vim.tbl_deep_extend("force", config, extension)
