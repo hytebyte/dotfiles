@@ -27,7 +27,6 @@ vim.opt.smartcase = true -- ... but not if it begins with upper case.
 vim.opt.hlsearch = true -- Highlight search matches.
 vim.opt.inccommand = "nosplit" -- Show find-replace preview when typing command.
 vim.opt.number = true -- Show line numbers.
-vim.opt.relativenumber = true -- Use line numbers relative to the current line.
 vim.opt.autowrite = true -- Automatically save before :next, :make etc.
 vim.opt.showmode = false -- We show the mode with airline or lightline.
 vim.opt.fileformats = { "unix", "dos", "mac" } -- Prefer Unix over Windows over OS 9 formats.
